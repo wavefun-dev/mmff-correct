@@ -1,3 +1,4 @@
+import sys
 import torch
 from read_xyz import read_xyz
 
@@ -9,7 +10,8 @@ if __name__ == "__main__":
     hart2kcal = 627.509
     model = torch.jit.load('DLFF03.pt')
     print(f"MLFF correction model version: {model.version} Copyright 2024 Wavefunction, Inc.")
-    mols = read_xyz('input.xyz')
+    inp = sys.argv[1] if len(sys.argv)>1 else 'input.xyz'
+    mols = read_xyz(inp)
 
     for mol in mols:
         print(f"Read {mol.label}")
